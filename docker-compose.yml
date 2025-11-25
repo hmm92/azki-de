@@ -1,0 +1,19 @@
+services:
+  mysql:
+    image: mysql:8.4
+    container_name: azki-mysql
+    restart: unless-stopped
+
+    environment:
+      MYSQL_DATABASE: azki_db
+      MYSQL_USER: etl_app_user
+      MYSQL_PASSWORD: etl_app_pass
+      MYSQL_ROOT_PASSWORD: root_password
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init:/docker-entrypoint-initdb.d
+      - ./csv:/var/lib/mysql-files

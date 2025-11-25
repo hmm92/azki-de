@@ -1,0 +1,19 @@
+# ============================
+# Local DB volumes
+mysql/data/
+
+# ============================
+# Migrations
+# ============================
+migrations/*.tmp
+
+# ============================
+# Python
+# ============================
+__pycache__/
+*.pyc
+
+# OS junk
+.DS_Store
+Thumbs.db
+instruction
