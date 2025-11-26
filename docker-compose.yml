@@ -16,7 +16,7 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./mysql/init:/docker-entrypoint-initdb.d
-      - ./csv:/var/lib/mysql-files
+      - ./data:/var/lib/mysql-files
       - ./mysql/conf.d:/etc/mysql/conf.d
 
   kafka:
