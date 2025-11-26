@@ -1,0 +1,31 @@
+{
+    "name": "mysql-cdc-azki",
+    "config": {
+      "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+      "tasks.max": "1",
+  
+      "database.hostname": "mysql",
+      "database.port": "3306",
+      "database.user": "etl_app_user",
+      "database.password": "etl_app_pass",
+  
+      "database.server.id": "184054",
+      "database.server.name": "mysql_server",
+  
+      "database.include.list": "azki_db",
+      "table.include.list": "azki_db.users",
+  
+      "topic.prefix": "mysql_cdc",
+
+      "include.schema.changes": "false",
+      "snapshot.locking.mode": "none",
+  
+      "schema.history.internal.kafka.bootstrap.servers": "kafka:29092",
+      "schema.history.internal.kafka.topic": "schema-changes.mysql",
+
+      "transforms": "unwrap",
+      "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+      "transforms.unwrap.drop.tombstones": "true",
+      "transforms.unwrap.delete.handling.mode": "drop"
+    }
+  }
