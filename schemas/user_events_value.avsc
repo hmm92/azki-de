@@ -1,0 +1,13 @@
+{
+  "type": "record",
+  "name": "UserEvent",
+  "namespace": "azki",
+  "fields": [
+    { "name": "event_time", "type": "string" },
+    { "name": "user_id", "type": "int" },
+    { "name": "session_id", "type": "string" },
+    { "name": "event_type", "type": "string" },
+    { "name": "channel", "type": "string" },
+    { "name": "premium_amount", "type": "double" }
+  ]
+}
