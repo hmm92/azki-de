@@ -2,6 +2,8 @@
 # Local DB volumes
 mysql/data/
 kafka/data
+clickhouse/data
+clickhouse/logs
 
 # ============================
 # Migrations

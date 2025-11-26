@@ -1,7 +1,7 @@
 services:
   mysql:
     image: mysql:8.0.36
-    container_name: azki-mysql
+    container_name: mysql
     restart: unless-stopped
 
     environment:
@@ -32,23 +32,19 @@ services:
       KAFKA_NODE_ID: "1"
       KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka:29093"
 
-      # listeners
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT"
       KAFKA_LISTENERS: "PLAINTEXT://kafka:29092,CONTROLLER://kafka:29093,PLAINTEXT_HOST://0.0.0.0:9092"
       KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092"
       KAFKA_INTER_BROKER_LISTENER_NAME: "PLAINTEXT"
       KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
 
-      # internal topics
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: "1"
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: "1"
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: "0"
 
-      # Kraft cluster ID (✔ درست)
       CLUSTER_ID: "MkU3OEVBNTcwNTJENDM2Qk"
 
-      # log dirs
       KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
 
     volumes:
@@ -131,4 +127,21 @@ services:
 
         server:
           listenPort: 8080
+
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.8
+    container_name: clickhouse
+    restart: unless-stopped
+    ports:
+      - "8123:8123"   
+      - "9000:9000"  
+    environment:
+      CLICKHOUSE_DB: azki
+      CLICKHOUSE_USER: etl_user
+      CLICKHOUSE_PASSWORD: etl_pass
+      CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT: "1"
+    volumes:
+      - ./clickhouse/data:/var/lib/clickhouse
+      - ./clickhouse/logs:/var/log/clickhouse-server
 
