@@ -1,6 +1,7 @@
 # ============================
 # Local DB volumes
 mysql/data/
+kafka/data
 
 # ============================
 # Migrations
